@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+ <html>
+ <head>
+     <meta charset='utf-8'>
+     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+     <title>Ibssoftware</title>
+     <meta name='viewport' content='width=device-width, initial-scale=1'>
+     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/homestyle.css' %}">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+    <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .topnav {
+      margin-top: 20px;
+      overflow: hidden;
+      background-color: #00416e;
+    }
+    .topnav a {
+      float: left;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 18px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+    
+    #dropdown{
+      float: right;
+      margin-top: 25px;
+      border-color:#00416e ;
+    }
+    
+    #dropbutton{
+      float: left;
+      color:#f2f2f2;
+      text-align: center;
+      padding: 14px 18px;
+      text-decoration: none;
+      font-size: 17px;
+      
+    }
+    .btn-secondary{
+      margin-top:1px;
+      margin-left: 5px;
+      
+      }
+      .dropdown-menu{
+        color:#00416e;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bolder;
+      }
+  </style>
+    
+ </head>
+
+ <body>
+     {% csrf_token %}
+     
+    <div class="dropdown">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+        style="background-color: #00416e;">
+        Welcome&nbsp;{{user.first_name}}
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="logout">Log out</a>
+      </div>
+    </div>  
+    
+    <div class="topnav">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropbutton" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false" style="background-color:#00416e; border-color: #00416e;" > Our Customers</button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {% for customer in customers %}
+        <a class="dropdown-item" href="cust{{customer.id}}" style="color:black">{{customer.name}}</a>
+        {% endfor %}
+      </div>
+      <a href="home/help">Help</a>
+      <a href="sentimental">Analysis</a>
+    </div>   
+    {% block content %}
+    {% endblock %}
+ </body>
+ </html>
+
